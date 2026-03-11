@@ -3,9 +3,8 @@ class Solution {
         if(n==0){
             return 1;
         }
-        for (int i = 1; i <= n; i *= 2) {
-            n ^= i;
-        }
-        return n;
+        int bits = (int)(Math.log(n)/Math.log(2))+1;
+        int mask= (1<<bits)-1;
+        return mask^n;
     }
 }
