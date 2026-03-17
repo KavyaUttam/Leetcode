@@ -1,5 +1,6 @@
 class Solution {
     public int largestSubmatrix(int[][] matrix) {
+        //O(m×nlogn)
       int m = matrix.length;
       int n= matrix[0].length;
       int area=0;
