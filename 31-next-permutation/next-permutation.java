@@ -1,45 +1,53 @@
 class Solution {
     public void nextPermutation(int[] nums) {
-        int ind1=-1;
-        int ind2=-1;
-        // step 1 find breaking point 
-        for(int i=nums.length-2;i>=0;i--){
-            if(nums[i]<nums[i+1]){
-                ind1=i;
+        int n = nums.length;
+        int pivot = -1;
+
+        // find pivot
+        for(int i = n - 1; i > 0; i--) {
+            if(nums[i - 1] < nums[i]) {
+                pivot = i - 1;
                 break;
             }
         }
-        // if there is no breaking  point 
-        if(ind1==-1){
-            reverse(nums,0);
-        }
-        
-        else{
-            // step 2 find next greater element and swap with ind2
-            for(int i=nums.length-1;i>=0;i--){
-                if(nums[i]>nums[ind1]){
-                    ind2=i;
-                    break;
-                }
-            }
 
-            swap(nums,ind1,ind2);
-            // step 3 reverse the rest right half
-            reverse(nums,ind1+1);
+        // if no pivot found
+        if(pivot == -1) {
+            reverse(nums, 0, n - 1);
+            return;
         }
+
+        // find next greater element
+        int swap_index = pivot;
+
+        for(int j = n - 1; j >= pivot + 1; j--) {
+            if(nums[j] > nums[pivot]) {
+                swap_index = j;
+                break;
+            }
+        }
+
+        // swap
+        swap(nums, swap_index, pivot);
+
+        // reverse remaining part
+        reverse(nums, pivot + 1, n - 1);
     }
-    void swap(int[] nums,int i,int j){
-        int temp=nums[i];
-        nums[i]=nums[j];
-        nums[j]=temp;
-    }
-    void reverse(int[] nums,int start){
-        int i=start;
-        int j=nums.length-1;
-        while(i<j){
-            swap(nums,i,j);
+
+    private static void reverse(int[] nums, int start, int end) {
+        int i = start;
+        int j = end;
+
+        while(i < j) {
+            swap(nums, i, j);
             i++;
             j--;
         }
+    }
+
+    private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
