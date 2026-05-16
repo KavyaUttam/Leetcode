@@ -13,6 +13,7 @@ class Solution {
          else if(nums[mid]<nums[high]){
             high=mid;
          }
+         //handles duplicates
          else{
             high--;
          }
