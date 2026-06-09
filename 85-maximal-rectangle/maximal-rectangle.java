@@ -69,7 +69,7 @@ class Solution {
             for (int j = 0; j < m; j++) {
 
                 if (matrix[i][j] == '1')
-                    heights[j]++;
+                   heights[j] += 1;
                 else
                     heights[j] = 0;
             }
